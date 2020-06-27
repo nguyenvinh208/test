@@ -7560,4 +7560,60 @@ function onYouTubeIframeAPIReady() {
   theme.ProductVideo.loadVideos(theme.ProductVideo.hosts.youtube);
 }
 
+const listHandle = $('.grid__item').map(function () {
+  return $(this).data("handle");
+});
+
+$.each(listHandle, (i, data) => {
+  $.getJSON("/products/" + data + ".js", function (product) {
+    let productID = product.id;
+    const media = product.media;
+    selectOption(media, productID);
+    colorSwatchOnClick(media, productID);
+  });
+});
+
+function colorSwatchOnClick(meida, productId){
+  const itemsID = '#product-item-'+productId+'';
+  const colorSwatch = ''+itemsID+' .color-swatch__image';
+
+  $(document).on('click', ''+colorSwatch+'', function(){
+    
+    $(''+colorSwatch+'').removeClass('active');
+    $(this).addClass('active');
+    const dataAlt = $(this).data('alt');
+    const setImageAlt = $.grep(meida, function(items) { 
+      return items.alt == dataAlt;
+    });
+    if(setImageAlt.length > 1){
+      $(''+itemsID+' .image-first').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+      $(''+itemsID+' .image-second').attr({src: setImageAlt[1].src, alt: setImageAlt[1].alt});
+    }
+    else {
+      $(''+itemsID+' .image-first').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+      $(''+itemsID+' .image-second').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+    }
+  })
+};
+
+function selectOption(data, productId) {
+  const itemsID = '#product-item-'+productId+'';
+  const selectedImage = ''+itemsID+' .color-swatch__image.active';
+  $(''+selectedImage+'').each(function(){
+    const swatchValue = $(this).data('alt');
+    const setImageAlt = $.grep(data, function(items) { 
+      return items.alt == swatchValue;
+    });
+ 
+    if(setImageAlt.length > 1){
+      $(''+itemsID+' .image-first').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+      $(''+itemsID+' .image-second').attr({src: setImageAlt[1].src, alt: setImageAlt[1].alt});
+    } 
+    else {
+      $(''+itemsID+' .image-first').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+      $(''+itemsID+' .image-second').attr({src: setImageAlt[0].src, alt: setImageAlt[0].alt});
+    }
+  });
+};
+
 $(theme.init);

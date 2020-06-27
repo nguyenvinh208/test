@@ -490,7 +490,7 @@ $z-index-predictive-search-wrapper: 1000;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/
-$svg-select-icon: #{'//cdn.shopify.com/s/files/1/2363/9597/t/30/assets/ico-select.svg?786'};
+$svg-select-icon: #{'//cdn.shopify.com/s/files/1/0419/1872/6293/t/1/assets/ico-select.svg?v=2900367270910467858'};
 
 /*================ Drawers ================*/
 $transition-drawer: all $transition-duration-slow cubic-bezier(0.29, 0.63, 0.44, 1);
@@ -618,7 +618,7 @@ $slick-opacity-not-active: 0.25;
 
 // Only called once so make sure proper file is grabbed
 @function slick-image-url($url) {
-  @return url(//cdn.shopify.com/s/files/1/2363/9597/t/30/assets/ajax-loader.gif?v=4135686330247201572);
+  @return url(//cdn.shopify.com/s/files/1/0419/1872/6293/t/1/assets/ajax-loader.gif?v=4135686330247201572);
 }
 
 // Unused intentionally
@@ -8726,3 +8726,57 @@ $min-height-disclosure: 92px;
   }
 }
 
+
+.color-swatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10001;
+  cursor: pointer;
+}
+
+.color-swatch__item {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.color-swatch__image {
+  width: 13px;
+  height: 13px;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #222;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &.active {
+    border: 2px solid #000;
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.grid-view-item {
+  .image-second {
+    display: none;
+  }
+
+  &:hover {
+    .image-second {
+      display: block;
+    }
+    
+    .image-first {
+      display: none;
+    }
+  }
+}
+
+.grid-view-item__image {
+  height: 100%;
+}
